@@ -1,5 +1,6 @@
 // import the express application and type definition
 import express, { Express } from "express";
+import { calculatePortfolioPerformance } from "./portfolio/portfolioPerformance";
 
 // initialize the express application
 const app: Express = express();
@@ -10,6 +11,14 @@ interface HealthCheckResponse {
     uptime: number;
     timestamp: string;
     version: string;
+}
+
+interface PortfolioPerformanceResponse {
+       initialInvestment: number;
+       currentValue: number;
+       profitOrLoss: number;
+       percentageChange: number;
+       performanceSummary: string;
 }
 
 // respond to GET request at endpoint "/" with message
@@ -31,6 +40,22 @@ app.get("/api/v1/health", (req, res) => {
 
     res.json(healthData);
 });
+
+app.get("/api/v1/portfolio/performance", (req, res) => {
+    const initialInvestment = Number(req.query.initialInvestment)
+    const currentValue = Number(req.query.currentValue)
+    const portfolio = calculatePortfolioPerformance(initialInvestment, currentValue)
+    
+    const portfolioResponse: PortfolioPerformanceResponse = {
+        initialInvestment: portfolio.initialInvestment,
+        currentValue: portfolio.currentValue,
+        profitOrLoss: portfolio.profitOrLoss,
+        percentageChange: portfolio.percentageChange,
+        performanceSummary: portfolio.performanceSummary,
+    };
+
+    res.json(portfolioResponse)
+})
 
 // export app and server for testing
 export default app;
