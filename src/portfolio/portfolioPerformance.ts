@@ -8,17 +8,17 @@ export function calculatePortfolioPerformance(initialInvestment: number, current
     
     switch (true) {
         case percentageChange >= 30:
-            return performanceSummary = `Excellent performance! Your investments are doing great.`;
+            performanceSummary = `Excellent performance! Your investments are doing great.`;
         case percentageChange < 30 && percentageChange >= 10: 
-            return performanceSummary = `Solid gain. Keep monitoring your investments`;
+            performanceSummary = `Solid gain. Keep monitoring your investments`;
         case percentageChange < 10 && percentageChange > 0:
-            return performanceSummary = "Modest gain. Your portfolio is growing slowly."
+            performanceSummary = "Modest gain. Your portfolio is growing slowly."
         case percentageChange == 0:
-            return performanceSummary = "No change. Your portfolio is holding steady."
+            performanceSummary = "No change. Your portfolio is holding steady."
         case percentageChange < 0 && percentageChange >= -10:
-            return performanceSummary = "Minor loss. Stay calm and review your options."
+            performanceSummary = "Minor loss. Stay calm and review your options."
         case percentageChange < -10:
-            return performanceSummary = "Significant loss. Review your portfolio strategy."
+            performanceSummary = "Significant loss. Review your portfolio strategy."
         
     }
 
@@ -29,12 +29,4 @@ export function calculatePortfolioPerformance(initialInvestment: number, current
         percentageChange,
         performanceSummary,
     };
-}
-
-interface PortfolioPerformanceResponse {
-       initialInvestment: number;
-       currentValue: number;
-       profitOrLoss: number;
-       percentageChange: number;
-       performanceSummary: string;
 }
