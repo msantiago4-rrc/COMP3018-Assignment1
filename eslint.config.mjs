@@ -24,7 +24,7 @@ export default tseslint.config(
         },
     },
     {
-        files: ["./**/*.ts", "./**/*.tsx"],
+        files: ["./**/*.ts"],
     },
     {
         rules: {
