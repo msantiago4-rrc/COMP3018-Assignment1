@@ -1,9 +1,20 @@
+/**
+ * Calculates the portfolio performance statistics
+ * @param initialInvestment - The initial amount invested
+ * @param currentValue - The current value of the portfolio
+ * @returns - The entire portfolio performance statistics
+ */
 export function calculatePortfolioPerformance(initialInvestment: number, currentValue: number): any {
 
     const profitOrLoss: number = currentValue - initialInvestment;
 
     const percentageChange: number = (profitOrLoss / initialInvestment) * 100;
     
+    /**
+     * Determines the performance summary based on the percentage change
+     * @param percentageChange - the percent difference of profit or loss vs the initial investment
+     * @returns - the performance summary string
+     */
     const getPerformanceSummary = (percentageChange: number): string => {
         switch (true) {
             case initialInvestment <= 0:
