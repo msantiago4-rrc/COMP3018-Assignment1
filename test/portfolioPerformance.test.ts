@@ -63,3 +63,19 @@ describe("calculatePortfolioPerformance", () => {
         expect(result?.performanceSummary).toBe("Minor loss. Stay calm and review your options.")
     })
 })
+
+describe("calculatePortfolioPerformance", () => {
+    it("Should return the correct string when percentChange is less than -10", () => {
+        // ARRANGE: Set up conditions
+        const initialInvestment = 10000;
+        const currentValue = 1000;
+
+        // ACT: Call the function
+        const result = calculatePortfolioPerformance(initialInvestment, currentValue);
+
+        // ASSERT: Verify the results
+        expect(result).not.toBeNull();
+        expect(result?.percentageChange).toBe(-90)
+        expect(result?.performanceSummary).toBe("Significant loss. Review your portfolio strategy.")
+    })
+})
