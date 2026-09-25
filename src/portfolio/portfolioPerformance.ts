@@ -6,6 +6,9 @@ export function calculatePortfolioPerformance(initialInvestment: number, current
     
     const getPerformanceSummary = (percentageChange: number): string => {
         switch (true) {
+            case initialInvestment <= 0:
+                return "Error: Initial investment can not be 0 or less";
+
             case percentageChange >= 30:
                 return "Excellent performance! Your investments are doing great.";
                 
@@ -23,6 +26,7 @@ export function calculatePortfolioPerformance(initialInvestment: number, current
 
             default:
                 return "No change. Your portfolio is holding steady.";
+
         }
     }
     
