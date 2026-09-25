@@ -1,4 +1,7 @@
+import { describe } from "node:test";
 import { calculatePortfolioPerformance } from "../src/portfolio/portfolioPerformance";
+import request, { Response } from "supertest";
+import app from "../src/app";
 
 describe("calculatePortfolioPerformance", () => {
     it("Should return the correct string when percentChange is > 30", () => {
@@ -77,5 +80,18 @@ describe("calculatePortfolioPerformance", () => {
         expect(result).not.toBeNull();
         expect(result?.percentageChange).toBe(-90)
         expect(result?.performanceSummary).toBe("Significant loss. Review your portfolio strategy.")
+    })
+})
+
+describe("GET /api/v1/portfolio/performance", () => {
+    it("should return calculatePerformanceSummary status", async () => {
+        const response: Response = await request(app).get("/api/v1/portfolio/performance");
+        expect(response.status).toBe(200);
+        expect(response.body).toHaveProperty("initialInvestment");
+        expect(response.body).toHaveProperty("currentValue");
+        expect(response.body).toHaveProperty("profitOrLoss");
+        expect(response.body).toHaveProperty("percentageChange");
+        expect(response.body).toHaveProperty("performanceSummary");
+        
     })
 })
