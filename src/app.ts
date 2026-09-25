@@ -13,11 +13,23 @@ interface HealthCheckResponse {
     version: string;
 }
 
+/**
+ * Represents the portfolio performance
+ */
 interface PortfolioPerformanceResponse {
+        /** The initial amount invested */
        initialInvestment: number;
+
+       /** The current value of the portfolio */
        currentValue: number;
+
+       /** The difference between the current value vs the initial investment */
        profitOrLoss: number;
+
+       /** The quotient percent of profit or loss and the initial investment  */
        percentageChange: number;
+
+       /** The string summary of the performance of the portfolio */
        performanceSummary: string;
 }
 
@@ -41,6 +53,10 @@ app.get("/api/v1/health", (req, res) => {
     res.json(healthData);
 });
 
+/**
+ * Portfolio Performance endpoint that returns the statistics of the portfolio
+ * @returns JSON response with portfolio information
+ */
 app.get("/api/v1/portfolio/performance", (req, res) => {
     const initialInvestment = Number(req.query.initialInvestment)
     const currentValue = Number(req.query.currentValue)
